@@ -58,7 +58,8 @@ public class Player extends Actor implements Interactable {
                 this.getCell().getNeighbor(-1, 0),
                 this.getCell().getNeighbor(1, 0),
                 this.getCell().getNeighbor(0, -1),
-                this.getCell().getNeighbor(0, 1)
+                this.getCell().getNeighbor(0, 1),
+                this.getCell()
         };
     }
 
