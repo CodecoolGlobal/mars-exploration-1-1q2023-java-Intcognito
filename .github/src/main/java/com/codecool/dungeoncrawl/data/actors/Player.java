@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.Interactable;
+import com.codecool.dungeoncrawl.data.ItemType;
 
 import java.util.Optional;
 import java.util.ArrayList;
@@ -75,5 +76,8 @@ public class Player extends Actor implements Interactable {
 
     private void pickupItemIfPresent(Item item) {
         inventory.add(item);
+        if (item.getName().equals("bazooka")) {
+            setDamage(10);
+        }
     }
 }
