@@ -1,9 +1,6 @@
 package com.codecool.dungeoncrawl.data.actors;
 
-import com.codecool.dungeoncrawl.data.Cell;
-import com.codecool.dungeoncrawl.data.GameMap;
-import com.codecool.dungeoncrawl.data.Interactable;
-import com.codecool.dungeoncrawl.data.ItemType;
+import com.codecool.dungeoncrawl.data.*;
 
 import java.util.Optional;
 import java.util.ArrayList;
@@ -29,6 +26,7 @@ public class Player extends Actor implements Interactable {
     public void performAction() {
         fightEnemyIfPresent();
         getSurroundingItem();
+        openDoor();
     }
 
     private Optional<Actor> getSurroundingEnemy() {
@@ -79,6 +77,15 @@ public class Player extends Actor implements Interactable {
         inventory.add(item);
         if (item.getName().equals("bazooka")) {
             setDamage(10);
+        }
+    }
+
+    private void openDoor(){
+        Cell[] surroundingCells = getSurroundingCells();
+        for (Cell cell: surroundingCells) {
+            if (cell.getType().equals(CellType.CLOSED_DOOR)){
+                cell.setType(CellType.OPENED_DOOR);
+            }
         }
     }
 }
