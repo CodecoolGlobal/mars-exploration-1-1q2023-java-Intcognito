@@ -1,8 +1,8 @@
 package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
-import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.logic.GameLogic;
+import com.codecool.dungeoncrawl.logic.Movement;
 import com.codecool.dungeoncrawl.ui.elements.MainStage;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
 import javafx.scene.Scene;
@@ -13,14 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.Set;
-import java.util.stream.Collectors;
-
 public class UI {
     private Canvas canvas;
     private GraphicsContext context;
-
     private MainStage mainStage;
     private GameLogic logic;
+    private Movement movement;
     private Set<KeyHandler> keyHandlers;
 
 
@@ -32,6 +30,7 @@ public class UI {
         this.context = canvas.getGraphicsContext2D();
         this.mainStage = new MainStage(canvas);
         this.keyHandlers = keyHandlers;
+        this.movement = new Movement(logic);
     }
 
     public void setUpPain(Stage primaryStage) {
@@ -46,6 +45,7 @@ public class UI {
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());
         }
+        movement.moveNPCs();
         refresh();
     }
 
