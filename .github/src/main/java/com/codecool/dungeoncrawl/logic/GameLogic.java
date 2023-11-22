@@ -33,8 +33,8 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getHealth());
     }
 
-    public String getPlayerItems() {
-        return "under construction...";
+    public List<String> getPlayerItems() {
+        return map.getPlayer().getInventory().stream().map(Item::getName).collect(Collectors.toList());
     }
 
     public GameMap getMap() {

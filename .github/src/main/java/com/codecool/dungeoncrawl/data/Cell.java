@@ -38,6 +38,10 @@ public class Cell implements Drawable {
         return item;
     }
 
+    public void removeItem() {
+        setItem(null);
+    }
+
     public void setItem(Item item) {
         this.item = item;
     }
@@ -58,7 +62,13 @@ public class Cell implements Drawable {
     public int getY() {
         return y;
     }
+
     public boolean containsSkeleton() {
-        return actor != null && getTileName() != null && actor.getTileName().equals("skeleton");
+        return actor != null && getTileName() != null &&
+                actor.getTileName().equals("skeleton");
+    }
+
+    public boolean containsItem() {
+        return item != null;
     }
 }

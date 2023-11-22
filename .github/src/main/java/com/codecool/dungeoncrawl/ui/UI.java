@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UI {
     private Canvas canvas;
@@ -56,7 +57,7 @@ public class UI {
                 Cell cell = logic.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
-                } else if (cell.getItem() != null){
+                } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {
                     Tiles.drawTile(context, cell, x, y);
@@ -64,6 +65,6 @@ public class UI {
             }
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
-        mainStage.setItemLabelText(logic.getPlayerItems());
+        mainStage.setItemLabelText(String.join(", ", logic.getPlayerItems()));
     }
 }
