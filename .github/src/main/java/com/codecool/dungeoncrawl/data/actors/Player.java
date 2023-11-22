@@ -12,11 +12,9 @@ public class Player extends Actor implements Interactable {
     private List<Item> inventory;
 
     public Player(Cell cell) {
-        super(cell);
+        super(cell, 5);
         this.inventory = new ArrayList<>();
     }
-
-    private int damage = 5;
 
     public List<Item> getInventory() {
         return inventory;
@@ -46,7 +44,7 @@ public class Player extends Actor implements Interactable {
     private void fightEnemyIfPresent() {
         if (getSurroundingEnemy().isPresent()) {
             Actor skeleton = getSurroundingEnemy().get();
-            skeleton.takeDamage(this.damage);
+            skeleton.takeDamage(this.getDamage());
             System.out.println(skeleton.getHealth());
             if (skeleton.getHealth() <= 0) {
                 skeleton.getCell().setActor(null);

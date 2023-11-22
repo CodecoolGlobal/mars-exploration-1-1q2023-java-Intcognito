@@ -8,10 +8,12 @@ import java.util.Optional;
 public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
+    private int damage;
 
-    public Actor(Cell cell) {
+    public Actor(Cell cell, int damage) {
         this.cell = cell;
         this.cell.setActor(this);
+        this.damage = damage;
     }
 
     public void move(int dx, int dy) {
@@ -39,5 +41,11 @@ public abstract class Actor implements Drawable {
 
     public void takeDamage(int damageAmount) {
         this.health -= damageAmount;
+    }
+    public int getDamage() {
+        return this.damage;
+    }
+    public void setDamage(int amount) {
+        this.damage = amount;
     }
 }
