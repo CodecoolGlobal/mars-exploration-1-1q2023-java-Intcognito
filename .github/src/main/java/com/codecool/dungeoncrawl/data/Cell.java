@@ -47,4 +47,7 @@ public class Cell implements Drawable {
     public int getY() {
         return y;
     }
+    public boolean containsSkeleton() {
+        return actor != null && getTileName() != null && actor.getTileName().equals("skeleton");
+    }
 }
