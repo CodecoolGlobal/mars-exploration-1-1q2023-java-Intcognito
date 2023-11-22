@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Player extends Actor implements Interact {
+    private List<Item> inventory;
 
     public Player(Cell cell) {
         super(cell);
