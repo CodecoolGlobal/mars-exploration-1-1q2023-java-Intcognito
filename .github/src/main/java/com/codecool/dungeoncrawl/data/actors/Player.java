@@ -35,7 +35,7 @@ public class Player extends Actor implements Interact {
                 this.getCell().getNeighbor(0, 1)
         };
         for (Cell cell : cells) {
-            if (cell != null && containsSkeleton(cell)) {
+            if (cell != null && cell.containsSkeleton()) {
                 System.out.println(cell.getActor().getTileName());
                 return Optional.of(cell.getActor());
             }
