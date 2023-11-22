@@ -40,7 +40,4 @@ public abstract class Actor implements Drawable {
     public void takeDamage(int damageAmount) {
         this.health -= damageAmount;
     }
-    /*public boolean containsSkeleton(Cell cell) {
-        return cell.getActor() != null && cell.getActor().getTileName() != null && cell.getActor().getTileName().equals("skeleton");
-    }*/
 }

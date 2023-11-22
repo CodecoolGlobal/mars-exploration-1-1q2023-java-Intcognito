@@ -1,24 +1,22 @@
 package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
-import com.codecool.dungeoncrawl.data.CellType;
-import com.codecool.dungeoncrawl.data.ItemType;
 import com.codecool.dungeoncrawl.data.GameMap;
-import com.codecool.dungeoncrawl.data.Interact;
-import com.codecool.dungeoncrawl.logic.GameLogic;
+import com.codecool.dungeoncrawl.data.Interactable;
 
 import java.util.Optional;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Player extends Actor implements Interact {
+public class Player extends Actor implements Interactable {
     private List<Item> inventory;
 
     public Player(Cell cell) {
         super(cell);
         this.inventory = new ArrayList<>();
     }
+
+    private int damage = 5;
 
     public List<Item> getInventory() {
         return inventory;
@@ -30,23 +28,13 @@ public class Player extends Actor implements Interact {
 
     @Override
     public void performAction() {
-        if (checkSurroundingCells().isPresent()) {
-            Actor skeleton = checkSurroundingCells().get();
-            skeleton.takeDamage(2);
-            System.out.println(skeleton.getHealth());
-            if (skeleton.getHealth() <= 0) {
-                skeleton.getCell().setActor(null);
-            }
-        }
+        fightEnemyIfPresent();
+        getSurroundingItem();
     }
-    public Optional<Actor> checkSurroundingCells() {
-        Cell[] cells = {
-                this.getCell().getNeighbor(-1, 0),
-                this.getCell().getNeighbor(1, 0),
-                this.getCell().getNeighbor(0, -1),
-                this.getCell().getNeighbor(0, 1)
-        };
-        for (Cell cell : cells) {
+
+    private Optional<Actor> getSurroundingEnemy() {
+        Cell[] surroundingCells = getSurroundingCells();
+        for (Cell cell : surroundingCells) {
             if (cell != null && cell.containsSkeleton()) {
                 System.out.println(cell.getActor().getTileName());
                 return Optional.of(cell.getActor());
@@ -55,4 +43,39 @@ public class Player extends Actor implements Interact {
         return Optional.empty();
     }
 
+    private void fightEnemyIfPresent() {
+        if (getSurroundingEnemy().isPresent()) {
+            Actor skeleton = getSurroundingEnemy().get();
+            skeleton.takeDamage(this.damage);
+            System.out.println(skeleton.getHealth());
+            if (skeleton.getHealth() <= 0) {
+                skeleton.getCell().setActor(null);
+            }
+        }
+    }
+
+    private Cell[] getSurroundingCells() {
+        return new Cell[]{
+                this.getCell().getNeighbor(-1, 0),
+                this.getCell().getNeighbor(1, 0),
+                this.getCell().getNeighbor(0, -1),
+                this.getCell().getNeighbor(0, 1)
+        };
+    }
+
+    private void getSurroundingItem() {
+        Cell[] surroundingCells = getSurroundingCells();
+        for (Cell cell : surroundingCells) {
+            if (cell != null && cell.containsItem()) {
+                System.out.println("Item obtained: " + cell.getItem().getName());
+                pickupItemIfPresent(cell.getItem());
+                cell.removeItem();
+                break;
+            }
+        }
+    }
+
+    private void pickupItemIfPresent(Item item) {
+        inventory.add(item);
+    }
 }

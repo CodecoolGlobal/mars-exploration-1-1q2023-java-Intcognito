@@ -1,5 +1,5 @@
 package com.codecool.dungeoncrawl.data;
 
-public interface Interact {
+public interface Interactable {
     void performAction();
 }
