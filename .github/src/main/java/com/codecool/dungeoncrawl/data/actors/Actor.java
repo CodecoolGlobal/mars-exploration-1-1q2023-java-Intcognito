@@ -3,6 +3,8 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.Drawable;
 
+import java.util.Optional;
+
 public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
@@ -34,4 +36,11 @@ public abstract class Actor implements Drawable {
     public int getY() {
         return cell.getY();
     }
+
+    public void takeDamage(int damageAmount) {
+        this.health -= damageAmount;
+    }
+    /*public boolean containsSkeleton(Cell cell) {
+        return cell.getActor() != null && cell.getActor().getTileName() != null && cell.getActor().getTileName().equals("skeleton");
+    }*/
 }
