@@ -43,13 +43,5 @@ public class GameMap {
     public int getHeight() {
         return height;
     }
-    public void removeItem() {
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                if (cells[x][y].containsItem()) {
-                    cells[x][y] = new Cell(this, x, y, CellType.FLOOR);
-                }
-            }
-        }
-    }
+
 }

@@ -29,5 +29,4 @@ public class Item implements Drawable, Interactable {
     public String getName() {
         return this.name;
     }
-
 }

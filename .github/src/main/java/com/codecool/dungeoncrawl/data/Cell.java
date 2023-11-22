@@ -40,7 +40,6 @@ public class Cell implements Drawable {
 
     public void removeItem() {
         setItem(null);
-        gameMap.removeItem();
     }
 
     public void setItem(Item item) {
