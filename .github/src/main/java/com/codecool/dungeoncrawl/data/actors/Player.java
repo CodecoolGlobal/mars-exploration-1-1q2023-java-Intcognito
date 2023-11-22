@@ -1,15 +1,26 @@
 package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.CellType;
+import com.codecool.dungeoncrawl.data.ItemType;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.Interact;
 import com.codecool.dungeoncrawl.logic.GameLogic;
 
 import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Player extends Actor implements Interact {
+
     public Player(Cell cell) {
         super(cell);
+        this.inventory = new ArrayList<>();
+    }
+
+    public List<Item> getInventory() {
+        return inventory;
     }
 
     public String getTileName() {

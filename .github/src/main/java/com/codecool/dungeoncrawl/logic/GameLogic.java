@@ -2,6 +2,10 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.GameMap;
+import com.codecool.dungeoncrawl.data.actors.Item;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameLogic {
     private GameMap map;
@@ -29,6 +33,9 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getHealth());
     }
 
+    public String getPlayerItems() {
+        return "under construction...";
+    }
 
     public GameMap getMap() {
         return map;
