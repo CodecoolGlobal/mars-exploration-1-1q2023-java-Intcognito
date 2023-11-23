@@ -52,6 +52,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Item(cell, ItemType.WEAPON, "bazooka");
                             break;
+                        case 't':
+                            cell.setType(CellType.FLOOR);
+                            new Item(cell, ItemType.TREE, "tree");
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

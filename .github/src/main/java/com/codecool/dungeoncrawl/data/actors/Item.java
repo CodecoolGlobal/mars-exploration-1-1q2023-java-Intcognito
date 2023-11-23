@@ -5,6 +5,8 @@ import com.codecool.dungeoncrawl.data.Drawable;
 import com.codecool.dungeoncrawl.data.Interactable;
 import com.codecool.dungeoncrawl.data.ItemType;
 
+import java.lang.reflect.Type;
+
 public class Item implements Drawable, Interactable {
     private final Cell cell;
     private final ItemType type;
@@ -28,5 +30,8 @@ public class Item implements Drawable, Interactable {
     }
     public String getName() {
         return this.name;
+    }
+    public ItemType getType() {
+        return this.type;
     }
 }

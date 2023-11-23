@@ -1,7 +1,6 @@
 package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
-import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.Interactable;
 import com.codecool.dungeoncrawl.data.ItemType;
 
@@ -27,22 +26,23 @@ public class Player extends Actor implements Interactable {
 
     @Override
     public void performAction() {
-        fightEnemyIfPresent();
+        //fightEnemyIfPresent();
+        fightIfNearActor();
         getSurroundingItem();
     }
 
-    private Optional<Actor> getSurroundingEnemy() {
+    /*private Optional<Actor> getSurroundingEnemy() {
         Cell[] surroundingCells = getSurroundingCells();
         for (Cell cell : surroundingCells) {
-            if (cell != null && cell.containsSkeleton()) {
+            if (cell != null && cell.containsCharacter()) {
                 System.out.println(cell.getActor().getTileName());
                 return Optional.of(cell.getActor());
             }
         }
         return Optional.empty();
-    }
+    }*/
 
-    private void fightEnemyIfPresent() {
+    /*private void fightEnemyIfPresent() {
         if (getSurroundingEnemy().isPresent()) {
             Actor skeleton = getSurroundingEnemy().get();
             skeleton.takeDamage(this.getDamage());
@@ -51,20 +51,11 @@ public class Player extends Actor implements Interactable {
                 skeleton.getCell().setActor(null);
             }
         }
-    }
-
-    private Cell[] getSurroundingCells() {
-        return new Cell[]{
-                this.getCell().getNeighbor(-1, 0),
-                this.getCell().getNeighbor(1, 0),
-                this.getCell().getNeighbor(0, -1),
-                this.getCell().getNeighbor(0, 1),
-                this.getCell()
-        };
-    }
+    }*/
 
     private void getSurroundingItem() {
-        Cell[] surroundingCells = getSurroundingCells();
+        List<Cell>  surroundingCells = new ArrayList<>(List.of(getSurroundingCells()));
+        surroundingCells.add(getCell());
         for (Cell cell : surroundingCells) {
             if (cell != null && cell.containsItem()) {
                 System.out.println("Item obtained: " + cell.getItem().getName());
@@ -77,7 +68,7 @@ public class Player extends Actor implements Interactable {
 
     private void pickupItemIfPresent(Item item) {
         inventory.add(item);
-        if (item.getName().equals("bazooka")) {
+        if (item.getType().equals(ItemType.WEAPON)) {
             setDamage(10);
         }
     }
