@@ -101,7 +101,7 @@ public class Player extends Actor implements Interactable {
     private void openDoor() {
         Cell[] surroundingCells = getSurroundingCells();
         for (Cell cell : surroundingCells) {
-            if (cell.getType().equals(CellType.CLOSED_DOOR)) {
+            if (cell.getType().equals(CellType.CLOSED_DOOR) && hasKey()) {
                 cell.setType(CellType.OPENED_DOOR);
             }
         }

@@ -13,8 +13,8 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+    public static GameMap loadMap(String text) {
+        InputStream is = MapLoader.class.getResourceAsStream(text);
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -63,6 +63,12 @@ public class MapLoader {
                         case 'm':
                             cell.setType(CellType.FLOOR);
                             new Cow(cell);
+                            break;
+                        case ',':
+                            cell.setType(CellType.GRASS);
+                            break;
+                        case 'S':
+                            cell.setType(CellType.CHEESE);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
