@@ -8,7 +8,6 @@ import com.codecool.dungeoncrawl.data.ItemType;
 import com.codecool.dungeoncrawl.data.*;
 
 
-import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,45 +36,6 @@ public class Player extends Actor implements Interactable {
         openDoor();
     }
 
-    /*private Optional<Actor> getSurroundingEnemy() {
-        Cell[] surroundingCells = getSurroundingCells();
-        for (Cell cell : surroundingCells) {
-            if (cell != null && cell.containsCharacter()) {
-
-        fightEnemyIfPresent();
-        getSurroundingItem();
-        openDoor();
-    }
-
-    private Optional<Actor> getSurroundingEnemy() {
-        Cell[] surroundingCells = getSurroundingCells();
-        for (Cell cell : surroundingCells) {
-            if (cell != null && cell.containsSkeleton()) {
-
-                System.out.println(cell.getActor().getTileName());
-                return Optional.of(cell.getActor());
-            }
-        }
-        return Optional.empty();
-
-    }*/
-
-    /*private void fightEnemyIfPresent() {
-
-    }
-
-    private void fightEnemyIfPresent() {
-
-        if (getSurroundingEnemy().isPresent()) {
-            Actor skeleton = getSurroundingEnemy().get();
-            skeleton.takeDamage(this.getDamage());
-            System.out.println(skeleton.getHealth());
-            if (skeleton.getHealth() <= 0) {
-                skeleton.getCell().setActor(null);
-            }
-        }
-
-    }*/
 
     private void getSurroundingItem() {
         Cell[] surroundingCells = getSurroundingCells();

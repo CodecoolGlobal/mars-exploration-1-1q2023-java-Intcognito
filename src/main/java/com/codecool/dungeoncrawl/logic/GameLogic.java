@@ -56,9 +56,6 @@ public class GameLogic {
     public boolean isGameOver() {
         return map.getPlayer().getHealth() <= 0;
     }
-   /* public boolean isGameWon() {
-        return map.getPlayer().getInventory().contains(ItemType.CROWN);
-    }*/
 
     public boolean isGameWon() {
         boolean hasCrown = false;
