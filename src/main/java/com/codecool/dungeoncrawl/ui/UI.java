@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
 
+import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.logic.GameLogic;
@@ -54,10 +55,12 @@ public class UI {
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());
         }
-
         updateCamera();
         movement.moveNPCs();
         refresh();
+        if (logic.getMap().getPlayer().getCell().getType().equals(CellType.CHEESE)){
+            this.logic.setMap("/map2.txt");
+        }
     }
     public double getCameraX() {
         return this.cameraX;
@@ -73,13 +76,11 @@ public class UI {
             for (int y = 0; y < logic.getMapHeight(); y++) {
                 Cell cell = logic.getCell(x, y);
                 if (cell.getActor() != null) {
-
                     Tiles.drawTile(context, cell.getActor(), x, y, cameraX, cameraY);
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y, cameraX, cameraY);
                 } else {
                     Tiles.drawTile(context, cell, x, y, cameraX, cameraY);
-
                 }
             }
         }

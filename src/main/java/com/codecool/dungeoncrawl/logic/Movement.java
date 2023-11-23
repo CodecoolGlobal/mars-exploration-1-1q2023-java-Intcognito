@@ -15,6 +15,14 @@ public class Movement {
     this.logic = logic;
   }
 
+    public boolean checkIfMoveIsValid(Cell cell) {
+        return cell.getActor() == null &&
+                cell.getTileName().equals("floor") ||
+                cell.getType().equals(CellType.OPENED_DOOR) ||
+                cell.getType().equals(CellType.GRASS) ||
+                cell.getType().equals(CellType.CHEESE);
+    }
+
   public boolean checkIfMoveIsValid(Cell cell) {
     return cell.getActor() == null && cell.getTileName().equals("floor") || cell.getType().equals(CellType.OPENED_DOOR);
   }

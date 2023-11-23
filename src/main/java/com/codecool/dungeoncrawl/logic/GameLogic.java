@@ -11,7 +11,7 @@ public class GameLogic {
     private GameMap map;
 
     public GameLogic() {
-        this.map = MapLoader.loadMap();
+        this.map = MapLoader.loadMap("/map.txt");
     }
 
     public double getMapWidth() {
@@ -43,5 +43,13 @@ public class GameLogic {
 
     public GameMap getMap() {
         return map;
+    }
+
+    public void setMap(String text) {
+        GameMap newMap = MapLoader.loadMap(text);
+        newMap.getCells()[1][1].setActor(null);
+        this.map.setCells(newMap.getCells());
+        this.map.setHeight(newMap.getHeight());
+        this.map.setWidth(newMap.getWidth());
     }
 }

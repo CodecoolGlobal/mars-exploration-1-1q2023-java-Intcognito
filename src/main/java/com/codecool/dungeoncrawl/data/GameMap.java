@@ -44,4 +44,19 @@ public class GameMap {
         return height;
     }
 
+    public Cell[][] getCells() {
+        return cells;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setCells(Cell[][] cells) {
+        this.cells = cells;
+    }
 }
