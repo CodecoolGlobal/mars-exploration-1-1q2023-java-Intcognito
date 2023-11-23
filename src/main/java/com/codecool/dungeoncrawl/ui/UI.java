@@ -3,7 +3,6 @@ package com.codecool.dungeoncrawl.ui;
 import com.codecool.dungeoncrawl.data.Cell;
 
 import com.codecool.dungeoncrawl.data.CellType;
-import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.logic.GameLogic;
 import com.codecool.dungeoncrawl.logic.Movement;
@@ -18,8 +17,6 @@ import javafx.stage.Stage;
 
 import java.util.Set;
 
-import java.util.stream.Collectors;
-
 public class UI {
     private Canvas canvas;
     private GraphicsContext context;
@@ -29,7 +26,8 @@ public class UI {
     private Movement movement;
     private double cameraX;
     private double cameraY;
-    private GameOverMessage gameOverMessage;
+    private final GameOverMessage gameOverMessage;
+    private final GameWinMessage gameWinMessage;
   
     public UI(GameLogic logic, Set<KeyHandler> keyHandlers) {
         this.canvas = new Canvas(
@@ -43,6 +41,7 @@ public class UI {
         this.cameraX = logic.getMap().getPlayer().getX() * Tiles.TILE_WIDTH - canvas.getWidth() / 2;
         this.cameraY = logic.getMap().getPlayer().getY() * Tiles.TILE_WIDTH - canvas.getHeight() / 2;
         this.gameOverMessage = new GameOverMessage();
+        this.gameWinMessage = new GameWinMessage();
     }
 
     public void setUpPain(Stage primaryStage) {
@@ -87,6 +86,9 @@ public class UI {
             }
             if (logic.isGameOver()) {
                 mainStage.getScene().setRoot(gameOverMessage);
+            }
+            if (logic.isGameWon()) {
+                mainStage.getScene().setRoot(gameWinMessage);
             }
         }
 

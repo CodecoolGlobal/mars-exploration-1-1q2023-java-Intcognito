@@ -71,6 +71,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Blob(cell);
                             break;
+                        case 'w':
+                            cell.setType(CellType.FLOOR);
+                            new Item(cell, ItemType.CROWN, "crown");
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

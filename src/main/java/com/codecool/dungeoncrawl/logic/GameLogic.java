@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.GameMap;
+import com.codecool.dungeoncrawl.data.ItemType;
 import com.codecool.dungeoncrawl.data.actors.Item;
 
 import java.util.List;
@@ -54,5 +55,19 @@ public class GameLogic {
     }
     public boolean isGameOver() {
         return map.getPlayer().getHealth() <= 0;
+    }
+   /* public boolean isGameWon() {
+        return map.getPlayer().getInventory().contains(ItemType.CROWN);
+    }*/
+
+    public boolean isGameWon() {
+        boolean hasCrown = false;
+        for (Item item : map.getPlayer().getInventory()) {
+            if (item.getType().equals(ItemType.CROWN)) {
+                hasCrown = true;
+                break;
+            }
+        }
+        return hasCrown;
     }
 }
