@@ -29,6 +29,7 @@ public class UI {
     private Movement movement;
     private double cameraX;
     private double cameraY;
+    private GameOverMessage gameOverMessage;
   
     public UI(GameLogic logic, Set<KeyHandler> keyHandlers) {
         this.canvas = new Canvas(
@@ -41,6 +42,7 @@ public class UI {
         this.movement = new Movement(logic);
         this.cameraX = logic.getMap().getPlayer().getX() * Tiles.TILE_WIDTH - canvas.getWidth() / 2;
         this.cameraY = logic.getMap().getPlayer().getY() * Tiles.TILE_WIDTH - canvas.getHeight() / 2;
+        this.gameOverMessage = new GameOverMessage();
     }
 
     public void setUpPain(Stage primaryStage) {
@@ -82,6 +84,9 @@ public class UI {
                 } else {
                     Tiles.drawTile(context, cell, x, y, cameraX, cameraY);
                 }
+            }
+            if (logic.isGameOver()) {
+                mainStage.getScene().setRoot(gameOverMessage);
             }
         }
 

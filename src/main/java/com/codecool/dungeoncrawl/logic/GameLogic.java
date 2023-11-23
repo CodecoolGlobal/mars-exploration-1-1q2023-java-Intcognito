@@ -52,4 +52,7 @@ public class GameLogic {
         this.map.setHeight(newMap.getHeight());
         this.map.setWidth(newMap.getWidth());
     }
+    public boolean isGameOver() {
+        return map.getPlayer().getHealth() <= 0;
+    }
 }
