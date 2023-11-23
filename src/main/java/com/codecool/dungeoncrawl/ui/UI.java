@@ -93,6 +93,8 @@ public class UI {
         if (player != null) {
             cameraX = Math.max(0, Math.min(cameraX, logic.getMapWidth() * Tiles.TILE_WIDTH - canvas.getWidth()));
             cameraY = Math.max(0, Math.min(cameraY, logic.getMapHeight() * Tiles.TILE_WIDTH - canvas.getHeight()));
+            cameraX = logic.getMap().getPlayer().getX()* Tiles.TILE_WIDTH - canvas.getWidth() / 2;
+            cameraY = logic.getMap().getPlayer().getY() * Tiles.TILE_WIDTH - canvas.getHeight() / 2;
         }
     }
 }

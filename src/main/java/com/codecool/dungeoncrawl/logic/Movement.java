@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Movement {
+  private final GameLogic logic;
   public Movement(GameLogic logic) {
     this.logic = logic;
   }
