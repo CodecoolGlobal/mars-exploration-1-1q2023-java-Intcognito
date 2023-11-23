@@ -77,6 +77,9 @@ public abstract class Actor implements Drawable {
             if (nearbyCharacter.getHealth() <= 0) {
                 nearbyCharacter.getCell().setActor(null);
             }
+            if (nearbyCharacter.getHealth() >= 0) {
+                this.health -= nearbyCharacter.getDamage();
+            }
         }
     }
 

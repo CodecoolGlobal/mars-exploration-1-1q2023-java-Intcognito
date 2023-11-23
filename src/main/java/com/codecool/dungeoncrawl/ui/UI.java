@@ -38,6 +38,8 @@ public class UI {
         this.mainStage = new MainStage(canvas);
         this.keyHandlers = keyHandlers;
         this.movement = new Movement(logic);
+        this.cameraX = logic.getMap().getPlayer().getX() * Tiles.TILE_WIDTH - canvas.getWidth() / 2;
+        this.cameraY = logic.getMap().getPlayer().getY() * Tiles.TILE_WIDTH - canvas.getHeight() / 2;
     }
 
     public void setUpPain(Stage primaryStage) {
@@ -91,9 +93,6 @@ public class UI {
         if (player != null) {
             cameraX = Math.max(0, Math.min(cameraX, logic.getMapWidth() * Tiles.TILE_WIDTH - canvas.getWidth()));
             cameraY = Math.max(0, Math.min(cameraY, logic.getMapHeight() * Tiles.TILE_WIDTH - canvas.getHeight()));
-            cameraX = player.getX() * Tiles.TILE_WIDTH - canvas.getWidth() / 2;
-            cameraY = player.getY() * Tiles.TILE_WIDTH - canvas.getHeight() / 2;
-
         }
     }
 }
