@@ -34,6 +34,7 @@ public class Player extends Actor implements Interactable {
         //fightEnemyIfPresent();
         fightIfNearActor();
         getSurroundingItem();
+        openDoor();
     }
 
     /*private Optional<Actor> getSurroundingEnemy() {
@@ -97,12 +98,22 @@ public class Player extends Actor implements Interactable {
         }
     }
 
-    private void openDoor(){
+    private void openDoor() {
         Cell[] surroundingCells = getSurroundingCells();
-        for (Cell cell: surroundingCells) {
-            if (cell.getType().equals(CellType.CLOSED_DOOR)){
+        for (Cell cell : surroundingCells) {
+            if (cell.getType().equals(CellType.CLOSED_DOOR)) {
                 cell.setType(CellType.OPENED_DOOR);
             }
         }
     }
+
+    private boolean hasKey() {
+        for (Item item : inventory) {
+            if (item.getType().equals(ItemType.KEY)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
