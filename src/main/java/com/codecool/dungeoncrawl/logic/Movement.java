@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.actors.Actor;
 
 import java.util.ArrayList;
@@ -11,11 +12,10 @@ public class Movement {
     this.logic = logic;
   }
 
-  private GameLogic logic;
+    public boolean checkIfMoveIsValid(Cell cell) {
+        return cell.getActor() == null && cell.getTileName().equals("floor") || cell.getType().equals(CellType.OPENED_DOOR);
+    }
 
-  public boolean checkIfMoveIsValid(Cell cell) {
-    return cell.getActor() == null && cell.getTileName().equals("floor");
-  }
 
   public void moveNPCs() {
     List<Actor> enemies = collectEnemies();
