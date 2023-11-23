@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Movement {
+
   private final GameLogic logic;
+  
   public Movement(GameLogic logic) {
     this.logic = logic;
   }
@@ -21,11 +23,19 @@ public class Movement {
                 cell.getType().equals(CellType.CHEESE);
     }
 
+  public boolean checkIfMoveIsValid(Cell cell) {
+    return cell.getActor() == null && cell.getTileName().equals("floor") || cell.getType().equals(CellType.OPENED_DOOR);
+  }
 
   public void moveNPCs() {
-    List<Actor> enemies = collectEnemies();
-    for (Actor enemy : enemies) {
-      Cell enemyPosition = enemy.getCell();
+    moveSkeletons();
+    moveBlobs();
+  }
+
+  private void moveSkeletons() {
+    List<Actor> skeletons = collectSkeletons();
+    for (Actor skeleton : skeletons) {
+      Cell enemyPosition = skeleton.getCell();
       while (true) {
         int[] movement = randomMovement();
         if (checkIfMoveIsValid(enemyPosition.getNeighbor(movement[0], movement[1]))) {
@@ -38,17 +48,49 @@ public class Movement {
     }
   }
 
-  private List<Actor> collectEnemies() {
-    List<Actor> enemies = new ArrayList<>();
+  private void moveBlobs() {
+    List<Actor> blobs = collectBlobs();
+    for (Actor blob : blobs) {
+      Cell enemyPosition = blob.getCell();
+      int moveCycle = blob.getCycle();
+      if (moveCycle < 2) {
+        if (enemyPosition.getNeighbor(-1, 0).getTileName().equals("floor")) {
+          blob.move(-1, 0);
+        }
+        blob.setCycle();
+      } else {
+        if (enemyPosition.getNeighbor(1, 0).getTileName().equals("floor")) {
+          blob.move(1, 0);
+        }
+        blob.setCycle();
+      }
+    }
+  }
+
+  private List<Actor> collectSkeletons() {
+    List<Actor> skeletons = new ArrayList<>();
     for (int x = 0; x < logic.getMapWidth(); x++) {
       for (int y = 0; y < logic.getMapHeight(); y++) {
         Cell cell = logic.getCell(x, y);
         if (cell.getActor() != null && cell.getActor().getTileName().equals("skeleton")) {
-          enemies.add(cell.getActor());
+          skeletons.add(cell.getActor());
         }
       }
     }
-    return enemies;
+    return skeletons;
+  }
+
+  private List<Actor> collectBlobs() {
+    List<Actor> blobs = new ArrayList<>();
+    for (int x = 0; x < logic.getMapWidth(); x++) {
+      for (int y = 0; y < logic.getMapHeight(); y++) {
+        Cell cell = logic.getCell(x, y);
+        if (cell.getActor() != null && cell.getActor().getTileName().equals("blob")) {
+          blobs.add(cell.getActor());
+        }
+      }
+    }
+    return blobs;
   }
 
   private boolean checkIfNearPlayer(Cell enemyPosition) {
