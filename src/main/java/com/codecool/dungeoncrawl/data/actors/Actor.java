@@ -9,11 +9,13 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
     private int damage;
+    private int cycle = 0;
 
     public Actor(Cell cell, int damage) {
         this.cell = cell;
         this.cell.setActor(this);
         this.damage = damage;
+        this.cycle = cycle;
     }
 
     public void move(int dx, int dy) {
@@ -47,6 +49,17 @@ public abstract class Actor implements Drawable {
     }
     public void setDamage(int amount) {
         this.damage = amount;
+    }
+
+    public int getCycle() {
+        return this.cycle;
+    }
+    public void setCycle() {
+        if (cycle < 3) {
+            cycle++;
+        } else {
+            cycle = 0;
+        }
     }
 
     protected Cell[] getSurroundingCells() {
