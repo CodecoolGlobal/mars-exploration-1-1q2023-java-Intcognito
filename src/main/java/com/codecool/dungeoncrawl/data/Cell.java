@@ -4,6 +4,8 @@ import com.codecool.dungeoncrawl.data.actors.Actor;
 import com.codecool.dungeoncrawl.data.actors.Blob;
 import com.codecool.dungeoncrawl.data.actors.Item;
 
+import java.util.Objects;
+
 public class Cell implements Drawable {
   private CellType type;
   private Actor actor;
@@ -64,13 +66,11 @@ public class Cell implements Drawable {
   }
 
   public boolean containsEnemy() {
-    return actor != null && getTileName() != null &&
-            actor.getTileName().equals("skeleton");
+    return actor != null && !Objects.equals(actor.getTileName(), "player");
   }
 
   public boolean containsPlayer() {
-    return actor != null && getTileName() != null &&
-            actor.getTileName().equals("player");
+    return actor != null && actor.getTileName().equals("player");
   }
 
   public boolean containsItem() {

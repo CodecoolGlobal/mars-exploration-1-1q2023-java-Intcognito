@@ -9,14 +9,14 @@ import java.util.List;
 public class Movement {
 
   private final GameLogic logic;
-  
+
   public Movement(GameLogic logic) {
     this.logic = logic;
   }
 
-    public boolean checkIfMoveIsValid(Cell cell) {
-        return cell.getActor() == null && cell.getItem() == null && cell.getType().isPassable();
-    }
+  public boolean checkIfMoveIsValid(Cell cell) {
+    return cell.getActor() == null && cell.getItem() == null && cell.getType().isPassable();
+  }
 
   public void moveNPCs() {
     moveSkeletons();
@@ -45,12 +45,14 @@ public class Movement {
       Cell enemyPosition = blob.getCell();
       int moveCycle = blob.getCycle();
       if (moveCycle < 2) {
-        if (enemyPosition.getNeighbor(-1, 0).getTileName().equals("floor")) {
+        if (checkIfMoveIsValid(enemyPosition.getNeighbor(-1, 0)) &&
+                !checkIfNearPlayer(enemyPosition)) {
           blob.move(-1, 0);
         }
         blob.setCycle();
       } else {
-        if (enemyPosition.getNeighbor(1, 0).getTileName().equals("floor")) {
+        if (checkIfMoveIsValid(enemyPosition.getNeighbor(1, 0)) &&
+                !checkIfNearPlayer(enemyPosition)) {
           blob.move(1, 0);
         }
         blob.setCycle();
