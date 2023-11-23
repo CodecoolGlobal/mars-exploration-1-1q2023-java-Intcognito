@@ -34,9 +34,9 @@ public class Tiles {
         tileMap.put("tree", new Tile(4, 2));
     }
 
-    public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
+    public static void drawTile(GraphicsContext context, Drawable d, int x, int y, double cameraX, double cameraY) {
         Tile tile = tileMap.get(d.getTileName());
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
-                x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
+                (x * TILE_WIDTH - cameraX), (y * TILE_WIDTH - cameraY), TILE_WIDTH, TILE_WIDTH);
     }
 }
