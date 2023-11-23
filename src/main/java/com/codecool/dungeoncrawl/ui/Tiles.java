@@ -32,11 +32,13 @@ public class Tiles {
         tileMap.put("bazooka", new Tile(11, 31));
         tileMap.put("buffedPlayer", new Tile(25,3));
         tileMap.put("tree", new Tile(4, 2));
+        tileMap.put("closedDoor", new Tile(8, 9));
+        tileMap.put("openedDoor", new Tile(9, 9));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y, double cameraX, double cameraY) {
         Tile tile = tileMap.get(d.getTileName());
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
-                (x * TILE_WIDTH - cameraX), (y * TILE_WIDTH - cameraY), TILE_WIDTH, TILE_WIDTH);
+                (x * TILE_WIDTH - cameraX), (y * TILE_WIDTH - cameraY), TILE_WIDTH, TILE_WIDTH);    
     }
 }

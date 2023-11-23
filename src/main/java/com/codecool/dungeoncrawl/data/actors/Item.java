@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.data.Drawable;
 import com.codecool.dungeoncrawl.data.Interactable;
 import com.codecool.dungeoncrawl.data.ItemType;
 
+
 import java.lang.reflect.Type;
 
 public class Item implements Drawable, Interactable {
@@ -31,6 +32,7 @@ public class Item implements Drawable, Interactable {
     public String getName() {
         return this.name;
     }
+
     public ItemType getType() {
         return this.type;
     }

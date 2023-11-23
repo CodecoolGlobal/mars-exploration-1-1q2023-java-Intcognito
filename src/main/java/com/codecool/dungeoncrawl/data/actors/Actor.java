@@ -48,6 +48,7 @@ public abstract class Actor implements Drawable {
     public void setDamage(int amount) {
         this.damage = amount;
     }
+
     protected Cell[] getSurroundingCells() {
         return new Cell[]{
                 this.getCell().getNeighbor(-1, 0),
@@ -78,4 +79,5 @@ public abstract class Actor implements Drawable {
             }
         }
     }
+
 }

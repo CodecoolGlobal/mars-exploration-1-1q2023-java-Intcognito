@@ -32,7 +32,9 @@ public class MainStage {
     public void setItemLabelText(String text) {
         this.statusPane.setItemValue(text);
     }
+
     public void setDamageValueLabelText(String text) {
         this.statusPane.setDamageValueLabel(text);
     }
+
 }
