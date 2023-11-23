@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.ItemType;
+import com.codecool.dungeoncrawl.data.actors.Cow;
 import com.codecool.dungeoncrawl.data.actors.Item;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
@@ -52,15 +53,16 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Item(cell, ItemType.WEAPON, "bazooka");
                             break;
-
                         case 't':
                             cell.setType(CellType.FLOOR);
                             new Item(cell, ItemType.TREE, "tree");
                             break;
-
                         case 'c':
                             cell.setType(CellType.CLOSED_DOOR);
-
+                            break;
+                        case 'm':
+                            cell.setType(CellType.FLOOR);
+                            new Cow(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
