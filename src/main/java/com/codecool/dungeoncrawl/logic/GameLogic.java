@@ -37,6 +37,10 @@ public class GameLogic {
         return map.getPlayer().getInventory().stream().map(Item::getName).collect(Collectors.toList());
     }
 
+    public String getPlayerDamage() {
+        return Integer.toString(map.getPlayer().getDamage());
+    }
+
     public GameMap getMap() {
         return map;
     }

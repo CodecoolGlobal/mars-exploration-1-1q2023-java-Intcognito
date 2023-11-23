@@ -2,7 +2,12 @@ package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
 
-public class Skeleton extends Actor {
+import com.codecool.dungeoncrawl.data.Interactable;
+
+import java.util.Optional;
+
+public class Skeleton extends Actor implements Interactable {
+
     public Skeleton(Cell cell) {
         super(cell, 2);
     }
@@ -12,4 +17,9 @@ public class Skeleton extends Actor {
         return "skeleton";
     }
 
+
+    @Override
+    public void performAction() {
+        fightIfNearActor();
+    }
 }

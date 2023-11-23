@@ -48,4 +48,36 @@ public abstract class Actor implements Drawable {
     public void setDamage(int amount) {
         this.damage = amount;
     }
+
+    protected Cell[] getSurroundingCells() {
+        return new Cell[]{
+                this.getCell().getNeighbor(-1, 0),
+                this.getCell().getNeighbor(1, 0),
+                this.getCell().getNeighbor(0, -1),
+                this.getCell().getNeighbor(0, 1),
+        };
+    }
+    protected Optional<Actor> getSurroundingCharacter() {
+        Cell[] surroundingCells = getSurroundingCells();
+        for (Cell cell : surroundingCells) {
+            if (cell != null && cell.containsEnemy()) {
+                System.out.println(cell.getActor().getTileName());
+                return Optional.of(cell.getActor());
+            } else if (cell != null && cell.containsPlayer()) {
+                return Optional.of(cell.getActor());
+            }
+        }
+        return Optional.empty();
+    }
+    protected void fightIfNearActor() {
+        if (getSurroundingCharacter().isPresent()) {
+            Actor nearbyCharacter = getSurroundingCharacter().get();
+            nearbyCharacter.takeDamage(this.getDamage());
+            System.out.println(nearbyCharacter.getHealth());
+            if (nearbyCharacter.getHealth() <= 0) {
+                nearbyCharacter.getCell().setActor(null);
+            }
+        }
+    }
+
 }

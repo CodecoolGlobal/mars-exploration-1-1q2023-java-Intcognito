@@ -15,6 +15,7 @@ public class Left implements KeyHandler {
     public void perform(KeyEvent event, GameMap map) {
         if (code.equals(event.getCode()) &&
                 movement.checkIfMoveIsValid(map.getPlayer().getCell().getNeighbor(-1, 0)))
+
             map.getPlayer().move(-1, 0);
     }
 }

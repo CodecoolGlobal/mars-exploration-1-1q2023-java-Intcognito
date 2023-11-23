@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 
 public class Down implements KeyHandler {
     public static final KeyCode code = KeyCode.DOWN;
+
     private final GameLogic logic = new GameLogic();
     private final Movement movement = new Movement(logic);
 

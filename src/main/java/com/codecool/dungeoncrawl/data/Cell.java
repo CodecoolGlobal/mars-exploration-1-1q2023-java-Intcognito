@@ -63,9 +63,13 @@ public class Cell implements Drawable {
         return y;
     }
 
-    public boolean containsSkeleton() {
+    public boolean containsEnemy() {
         return actor != null && getTileName() != null &&
                 actor.getTileName().equals("skeleton");
+    }
+    public boolean containsPlayer() {
+        return actor != null && getTileName() != null &&
+                actor.getTileName().equals("player");
     }
 
     public boolean containsItem() {
